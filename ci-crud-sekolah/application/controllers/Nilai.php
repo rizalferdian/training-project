@@ -30,7 +30,7 @@ class Nilai extends Auth_Controller {
   {
     $this->form_validation->set_rules('id_siswa', "Nama Siswa", 'required');
     $this->form_validation->set_rules('id_mapel', 'Nama Mata Pelajaran', 'required');
-    $this->form_validation->set_rules('total_nilai', 'Jumlah Nilai', 'required');
+    $this->form_validation->set_rules('total_nilai', 'Nilai', 'required|integer');
     
     
     if($this->form_validation->run() == false)
