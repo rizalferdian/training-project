@@ -17,7 +17,6 @@
                 <input class="form-control"  placeholder="Enter text"  name='nama' value="<?php echo @$dataKota['nama']; ?>">
                 <p class="help-block">Example Malang.</p>
               </div>
-
             </form>
           </div>
           <div class="col-lg-1"></div>

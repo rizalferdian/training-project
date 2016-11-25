@@ -29,6 +29,7 @@
             </thead>
           </table>
           <a href="#" class="tambah btn btn-default">Tambah Data</a>
+          <a href="<?php echo base_url('pegawai/export'); ?>" class="btn btn-default">Export File</a>
           <!-- /.table-responsive -->
         </div>
         <!-- /.panel-body -->

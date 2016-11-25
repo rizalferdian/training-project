@@ -24,43 +24,31 @@
   function reloadTable(){
     meja.ajax.reload( null, false );
   }
-
-  /* global $confirm */
-  $(document).on('click', '.hapus', function(event) {
-    event.preventDefault();
-    $confirm = confirm("Are you sure ?");
-    if($confirm){ 
-      var url = $(this).attr("href");
-      $.get(url, function(){
-        reloadTable();
-      });
-    }
-  });
-
-  $(document).on("click", "a.update", function(e) {
-    e.preventDefault();
-    tombol = "tambah";
-
-    // do lots of stuff
-    var nilai = $(this).closest('tr').children().html();
-    $.get("<?php echo base_url($this->router->fetch_class() . '/form'); ?>/" + nilai, function(msg){
-      $("#modal-body").html(msg);
-      $('#myModal').modal('show');
-    });
-  });
   
+  /* table */
   $(document).ready(function() {
     meja = $('#dataTables-example').DataTable( {
       "ajax": "<?php echo base_url($this->router->fetch_class() . '/data'); ?>"
     });
   });
-   
   
+  
+  /* alert */
+  $(document).ready(function() {
+    var html = $("#alert-body").html();
+    if(html){
+        $('#myAlert').modal('show'); 
+        setTimeout(function () {
+         $('#tutupAlert').focus();
+        }, 500);
+    }
+  });
+  
+  /* tombol tambah */
   $(document).on("click", "a.tambah", function(event) {
     event.preventDefault();
     tombol = "tambah";
 
-    // do lots of stuff
     var nilai = $(this).closest('tr').children().html();
     $.get("<?php echo base_url($this->router->fetch_class() . '/form'); ?>", function(msg){
       $("#modal-body").html(msg);
@@ -68,8 +56,59 @@
     });
   });
   
-  $(document).on("submit", "#myform", function(event) {
+  /* tombol update*/
+  $(document).on("click", "a.update", function(e) {
+    e.preventDefault();
+
+    var nilai = $(this).closest('tr').children().html();
+    $.get("<?php echo base_url($this->router->fetch_class() . '/form'); ?>/" + nilai, function(msg){
+      $("#modal-body").html(msg);
+      $('#myModal').modal('show');
+    });
+  });
+
+  /* tombol hapus */
+  $(document).on('click', 'a.hapus', function(event) {
     event.preventDefault();
+    // confirm
+    $confirm = confirm("Apakah anda yakin ?");
+    if($confirm){ 
+      var url = $(this).attr("href");
+      $.get(url, function(){
+        reloadTable();
+      });
+    }
+  });
+  
+  /* tombol import */
+  $(document).on("click", "a.import", function(event) {
+    event.preventDefault();
+    $("#submit").attr("form", "form_import");
+    tombol = "import";
+
+    var nilai = $(this).closest('tr').children().html();
+    $.get("<?php echo base_url($this->router->fetch_class() . '/form_import'); ?>", function(msg){
+      $("#modal-body").html(msg);
+      $('#myModal').modal('show');
+    });
+  });
+  
+  /* tombol alert */
+  $(document).on("click", "#tutupAlert", function(event){
+    if(tombol == "tambah") {
+      $('#myModal').modal('show');
+    }
+  });
+
+  /* form */
+  $(document).on("submit", "#myform", function(event) {
+    $("#submit").attr("form", "myform");
+    if(tombol == "import"){
+      return true;
+    }
+    
+    event.preventDefault();
+    
     var form = $(this);
     $.post(form.attr('action') , form.serialize(), function(msg){
       $('#myModal').modal('hide');
@@ -77,18 +116,19 @@
       setTimeout(function(){ 
         $('#myAlert').modal('show'); 
         setTimeout(function () {
-         $('#tutup').focus();
+         $('#tutupAlert').focus();
         }, 500);
       }, 500);
       reloadTable();
       setTimeout(function(){ 
-      if(tombol == "tambah") {
-        meja.page( 'last' ).draw( 'page' );
-      }
+        if(tombol == "tambah") {
+          meja.page( 'last' ).draw( 'page' );
+        }
       }, 500);
     });
   });
   
+  /* login */
   $(document).on("submit", "#formlogin", function(event) {
     event.preventDefault();
     $("#alert").slideUp( 300 );
@@ -101,7 +141,7 @@
         $("#alert-body").html(msg[1]);
         $('#myAlert').modal('show');
         setTimeout(function () {
-         $('#tutup').focus();
+         $('#tutupAlert').focus();
         }, 500);
       }
     });

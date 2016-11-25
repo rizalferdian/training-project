@@ -12,19 +12,11 @@ if(mysql_num_rows($query) == 1){
 	$dataLogin = mysql_fetch_array($query);
 	if($pass == $dataLogin['password']){
 		$_SESSION['username'] = $user;
-		header('Location: home.php');
+		echo 'true';
 	} else {
-		header('Location: login.php');
+		echo 'username atau password anda salah';
 	}
 } else {
-	header('Location: login.php');
+	echo 'username atau password anda salah';
 }
-
-
-/*$sql = "select * from login";
-$result = mysql_query($sql);
-
-while ($data = mysql_fetch_array($result)) {
-	echo $data["username"];
-}*/
 ?>

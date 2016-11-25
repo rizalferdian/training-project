@@ -57,3 +57,4 @@
   </div>
   <!-- /.row -->
 </div>
+<?php alert($this->session->flashdata('alert')); ?>

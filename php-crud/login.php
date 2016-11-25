@@ -17,7 +17,7 @@
 			</div>
 
 			<!-- Table -->
-			<form class="form-horizontal" action="proses-login.php" method="post">
+			<form class="form-horizontal" action="proses-login.php" method="post" id="formLogin">
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="username">Username:</label>
 					<div class="col-sm-10">
@@ -38,6 +38,7 @@
 			</form>
 		</div>
 	</div>
-
+	<script type="text/javascript" src="asset\jquery.js"></script>
+	<script type="text/javascript" src="asset\script.js"></script>
 </body>
 </html>

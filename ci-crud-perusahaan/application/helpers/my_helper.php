@@ -23,7 +23,7 @@ function modal()
         </div>
         <div class="modal-body" id="modal-body"></div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-default" form="myform">Submit Button</button>
+          <button type="submit" class="btn btn-default" id="submit" form="myform">Submit Button</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -32,7 +32,7 @@ function modal()
   <?php
 }
 
-function alert()
+function alert($msg = null)
 {
   ?>
   <div class="modal fade" id="myAlert" role="dialog">
@@ -42,9 +42,9 @@ function alert()
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Alert Information</h4>
         </div>
-        <div class="modal-body" id="alert-body"></div>
+        <div class="modal-body" id="alert-body"><?php echo $msg ?></div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default tutup" data-dismiss="modal" id="tutup">Close</button>
+          <button type="button" class="btn btn-default tutup" data-dismiss="modal" id="tutupAlert">Close</button>
         </div>
       </div>
     </div>

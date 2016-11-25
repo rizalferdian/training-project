@@ -25,6 +25,8 @@
             </thead>
           </table>
           <a href="#" class="tambah btn btn-default">Tambah Data</a>
+          <a href="#" class="import btn btn-default">Import File</a>
+          <a href="<?php echo base_url('posisi/export'); ?>" class="btn btn-default">Export File</a>
           <!-- /.table-responsive -->
         </div>
         <!-- /.panel-body -->
@@ -39,4 +41,4 @@
 
 <!-- Modal -->
 <?php modal(); ?>
-<?php alert(); ?>
+<?php alert($this->session->flashdata('alert')); ?>

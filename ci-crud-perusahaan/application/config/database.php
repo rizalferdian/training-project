@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'cendana',
+	'hostname' => '139.59.226.31',
+	'username' => 'cendana',
+	'password' => 'cendananr2425',
+	'database' => 'cendana_rizal_ci_crud_perusahaan',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

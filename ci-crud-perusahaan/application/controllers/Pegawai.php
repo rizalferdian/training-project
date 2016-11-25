@@ -69,5 +69,44 @@ class Pegawai extends MY_Controller {
     $json["data"] = $array;
     echo json_encode($json);
   }
+  
+  public function export()
+  {
+    error_reporting(E_ALL);
+    
+    include_once './assets/phpexcel/Classes/PHPExcel.php';
+    $objPHPExcel = new PHPExcel();
+    
+    $data = $this->M_pegawai->read();
+    
+    $objPHPExcel = new PHPExcel(); 
+    $objPHPExcel->setActiveSheetIndex(0); 
+    $rowCount = 1; 
+    
+    $objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount, "id"); 
+    $objPHPExcel->getActiveSheet()->SetCellValue('B'.$rowCount, "Nama Pegawai");
+    $objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount, "Kelamin");
+    $objPHPExcel->getActiveSheet()->SetCellValue('D'.$rowCount, "telp");
+    $objPHPExcel->getActiveSheet()->SetCellValue('E'.$rowCount, "Kota");
+    $objPHPExcel->getActiveSheet()->SetCellValue('F'.$rowCount, "Posisi");
+    $rowCount++;
+    
+    foreach($data as $value){
+        $objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount, $value['id']); 
+        $objPHPExcel->getActiveSheet()->SetCellValue('B'.$rowCount, $value['namaPegawai']); 
+        $objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount, $value['namaKelamin']); 
+        $objPHPExcel->getActiveSheet()->setCellValueExplicit('D'.$rowCount, $value['telp'], PHPExcel_Cell_DataType::TYPE_STRING);
+        $objPHPExcel->getActiveSheet()->SetCellValue('E'.$rowCount, $value['namaKota']); 
+        $objPHPExcel->getActiveSheet()->SetCellValue('F'.$rowCount, $value['namaPosisi']); 
+        $rowCount++; 
+    } 
+    
+    $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel); 
+    $objWriter->save('./assets/excel/pegawai.xlsx'); 
+    
+    $this->load->helper('download');
+    force_download('./assets/excel/pegawai.xlsx', NULL);
+    redirect("pegawai");
+  }
 }
 ?>

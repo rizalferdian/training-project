@@ -42,8 +42,8 @@
                     Pilih Kota
                   </option>
                   <?php foreach($dataKota as $value) { ?>
-                  <option value="<?php echo $value['id']; ?>" <?php if(@$dataPegawai['id_posisi'] == $value['id']) echo "selected"; ?>>
-                    <?php echo $value['nama']; ?>
+                  <option value="<?= $value['id']; ?>" <?php if(@$dataPegawai['id_kota'] == $value['id']) echo "selected"; ?>>
+                    <?= $value['nama']; ?>
                   </option>
                   <?php } ?>
                 </select>

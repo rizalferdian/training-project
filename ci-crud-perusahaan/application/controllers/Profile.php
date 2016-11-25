@@ -17,6 +17,7 @@ class Profile extends MY_Controller {
     
     $data['id'] = $input['id'];
     $data['username'] = $input['username'];
+    
     if (
       !empty($input['password']) and 
       ($input['password'] == $input['confirmPassword'])
@@ -34,13 +35,13 @@ class Profile extends MY_Controller {
       $this->load->library('upload', $config);
 
       if (!$this->upload->do_upload('file')) {
-              echo $this->upload->display_errors();
-      } else {
-              echo "sukses";
+        $this->session->set_flashdata('alert', err_msg($this->upload->display_errors()));
+        redirect("profile");
       }
     }
     
     $this->M_profile->update($data);
-    echo succ_msg("Data telah terupdate");
+    $this->session->set_flashdata('alert', succ_msg("Data telah Terupdate"));
+    redirect("profile");
   }
 }
